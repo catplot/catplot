@@ -1,0 +1,28 @@
+url: https://catplot.catplot.org
+
+authors:
+  Songqi Duan:
+    href: https://songqi.org
+
+destination: docs
+
+template:
+  bootstrap: 5
+  includes:
+    in_header:
+      <script async src="https://umami.catplot.org/script.js" data-website-id="0dfb7457-0eba-475a-8f4c-68ada132ed05"></script>
+
+reference:
+- title: "Theme"
+  desc: "Customizing the appearance of a plot"
+- contents:
+  - has_concept("theme")
+# - title: "Utility functions"
+#   desc: "Useful functions to help with a variety of tasks"
+# - contents:
+#   - utilities
+#
+# - title: "Re-exports"
+#   desc: "Functions re-exported from other packages"
+# - contents:
+#   - reexports
