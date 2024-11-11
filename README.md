@@ -9,6 +9,9 @@
 status](http://gitlab.catplot.com/catplot/catplot/badges/main/pipeline.svg)](http://gitlab.catplot.com/catplot/catplot/-/commits/main)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/catplot/catplot/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/catplot/catplot/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/catplot/catplot/graph/badge.svg)](https://app.codecov.io/gh/catplot/catplot)
 <!-- badges: end -->
 
 ## 🤪 Overview
