@@ -242,7 +242,8 @@ theme_cat <- function(
       hjust = 0.5
     ),
     # Legend position
-    legend.key = element_blank(),
+    legend.key.height = unit(base_font_size, "pt"),
+    legend.key.width = unit(base_font_size, "pt"),
     legend.position = legend_position,
     legend.position.inside = legend_position_inside,
     legend.margin = legend_margin,
@@ -276,7 +277,7 @@ adjust_text_alignment <- function(angle) {
     vjust <- 1
   } else if (angle > 0 && angle < 90) {
     hjust <- 1
-    vjust <- 0.5
+    vjust <- 1
   } else if (angle >= 90 && angle < 135) {
     hjust <- 1
     vjust <- 0.5
