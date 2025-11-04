@@ -1,2 +1,3 @@
-#' @import ggplot2 rlang
+#' @import ggplot2
+#' @import rlang
 NULL

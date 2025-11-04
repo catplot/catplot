@@ -17,6 +17,7 @@ reference:
   desc: "Customizing the appearance of a plot"
 - contents:
   - has_concept("theme")
+  - has_concept("others")
 # - title: "Utility functions"
 #   desc: "Useful functions to help with a variety of tasks"
 # - contents:

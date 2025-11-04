@@ -3,7 +3,7 @@ library(ggplot2)
 
 p <- iris |>
   ggplot(aes(x = Sepal.Length, y = Sepal.Width)) +
-  geom_point(aes(color = Species))
+  geom_point(aes(color = Species), size = 0.5)
 p
 # Axis title
 p + theme_cat(show_title = "y")
@@ -26,3 +26,6 @@ p + theme_cat(
   show_panel_grid = "both",
   show_title = "y"
 )
+
+# Panel size
+p + theme_cat(panel_widths = 120, panel_heights = 120)

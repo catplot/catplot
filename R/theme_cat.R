@@ -29,6 +29,8 @@ theme_cat <- function(
     base_font_size = 8,
     font_family = NULL,
     linewidth = 0.5,
+    panel_widths = NULL,
+    panel_heights = NULL,
     aspect_ratio = NULL,
     frame = "open",
     show_panel_grid = "none",
@@ -44,6 +46,12 @@ theme_cat <- function(
     x_text_angle = 0,
     ...) {
   linewidth <- linewidth * 0.5 / 1.07
+  panel_widths <- if (!is.null(panel_widths)) {
+    unit(panel_widths, "pt")
+  }
+  panel_heights <- if (!is.null(panel_heights)) {
+    unit(panel_heights, "pt")
+  }
 
   arg_match0(arg = frame, values = c("none", "closed", "open"))
   arg_match0(arg = show_panel_grid, values = c("none", "x", "y", "both"))
@@ -58,10 +66,10 @@ theme_cat <- function(
 
   if (is_null(x = legend_position_inside)) {
     legend_margin <- switch(legend_position,
-      "right" = margin(l = -8),
-      "top" = margin(b = -8),
-      "bottom" = margin(t = -8),
-      "left" = margin(r = -8)
+                            "right" = margin(l = -8),
+                            "top" = margin(b = -8),
+                            "bottom" = margin(t = -8),
+                            "left" = margin(r = -8)
     )
   } else {
     legend_position <- "inside"
@@ -82,11 +90,11 @@ theme_cat <- function(
 
   legend_direction <- legend_direction %||% "default"
   legend_direction <- switch(legend_position,
-    "h" = "horizontal",
-    "horizontal" = "horizontal",
-    "v" = "vertical",
-    "vertical" = "vertical",
-    "default" = "NULL"
+                             "h" = "horizontal",
+                             "horizontal" = "horizontal",
+                             "v" = "vertical",
+                             "vertical" = "vertical",
+                             "default" = "NULL"
   )
   tick_element <-
     element_line(
@@ -127,10 +135,10 @@ theme_cat <- function(
     axis_text_x <- element_text(
       family = font_family,
       face = switch(text_italic,
-        "x" = "italic",
-        "y" = "plain",
-        "both" = "italic",
-        "none" = "plain"
+                    "x" = "italic",
+                    "y" = "plain",
+                    "both" = "italic",
+                    "none" = "plain"
       ),
       colour = "black",
       size = base_font_size,
@@ -145,10 +153,10 @@ theme_cat <- function(
     axis_text_y <- element_text(
       family = font_family,
       face = switch(text_italic,
-        "x" = "plain",
-        "y" = "italic",
-        "both" = "italic",
-        "none" = "plain"
+                    "x" = "plain",
+                    "y" = "italic",
+                    "both" = "italic",
+                    "none" = "plain"
       ),
       colour = "black",
       size = base_font_size
@@ -206,6 +214,8 @@ theme_cat <- function(
   # Default theme
   default_theme <- theme(
     aspect.ratio = aspect_ratio,
+    panel.widths = panel_widths,
+    panel.heights = panel_heights,
     line = element_line(color = "black"),
     rect = element_rect(),
     text = element_text(
@@ -226,9 +236,10 @@ theme_cat <- function(
     axis.ticks.y = axis_ticks_y,
     axis.ticks.length = unit(ticks_length, "pt"),
     # Panel grid
-    panel.grid.major.x = panel_grid_x,
-    panel.grid.major.y = panel_grid_y,
-    panel.grid.minor = element_blank(),
+    panel.grid.major.x = panel_grid_major_x,
+    panel.grid.major.y = panel_grid_major_y,
+    panel.grid.minor.x = panel_grid_minor_x,
+    panel.grid.minor.y = panel_grid_minor_y,
     # Panel border
     panel.border = panel_border,
     panel.background = element_blank(),
@@ -242,7 +253,8 @@ theme_cat <- function(
       hjust = 0.5
     ),
     # Legend position
-    legend.key = element_blank(),
+    legend.key.height = unit(base_font_size, "pt"),
+    legend.key.width = unit(base_font_size, "pt"),
     legend.position = legend_position,
     legend.position.inside = legend_position_inside,
     legend.margin = legend_margin,
@@ -252,7 +264,8 @@ theme_cat <- function(
       family = font_family,
       size = base_font_size,
       face = "plain",
-      colour = "black"
+      colour = "black",
+      margin = margin(l = 0)
     ),
     legend.background = element_blank(),
     # Strip
@@ -276,7 +289,7 @@ adjust_text_alignment <- function(angle) {
     vjust <- 1
   } else if (angle > 0 && angle < 90) {
     hjust <- 1
-    vjust <- 0.5
+    vjust <- 1
   } else if (angle >= 90 && angle < 135) {
     hjust <- 1
     vjust <- 0.5

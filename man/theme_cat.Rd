@@ -8,6 +8,8 @@ theme_cat(
   base_font_size = 8,
   font_family = NULL,
   linewidth = 0.5,
+  panel_widths = NULL,
+  panel_heights = NULL,
   aspect_ratio = NULL,
   frame = "open",
   show_panel_grid = "none",
@@ -75,10 +77,11 @@ library(ggplot2)
 
 p <- iris |>
   ggplot(aes(x = Sepal.Length, y = Sepal.Width)) +
-  geom_point(aes(color = Species))
+  geom_point(aes(color = Species), size = 0.5)
 p
 # Axis title
-p + theme_cat(show_title = "y")
+p + theme_cat(show_title = "y") +
+  theme(legend.text = element_text(margin = margin(l = 0)))
 
 # Axis text
 p + theme_cat(
@@ -98,5 +101,8 @@ p + theme_cat(
   show_panel_grid = "both",
   show_title = "y"
 )
+
+# Panel size
+p + theme_cat(panel_widths = 120, panel_heights = 120)
 }
 \concept{theme}
