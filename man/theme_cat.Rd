@@ -12,7 +12,8 @@ theme_cat(
   panel_heights = NULL,
   aspect_ratio = NULL,
   frame = "open",
-  show_panel_grid = "none",
+  show_panel_grid_marjor = "none",
+  show_panel_grid_minor = "none",
   show_title = "both",
   show_text = "both",
   text_italic = "none",
@@ -33,12 +34,20 @@ theme_cat(
 
 \item{linewidth}{Numeric, line width (default: 0.5)}
 
+\item{panel_widths}{Numeric vector, panel widths in pt (default: NULL)}
+
+\item{panel_heights}{Numeric vector, panel heights in pt (default: NULL)}
+
 \item{aspect_ratio}{Numeric, aspect ratio of the plot (default: NULL)}
 
 \item{frame}{Character, frame type, "none","closed" or "open" (default:
 "closed")}
 
-\item{show_panel_grid}{Character, panel grid visibility (default: "none")}
+\item{show_panel_grid_marjor}{Character, major panel grid visibility
+(default: "none")}
+
+\item{show_panel_grid_minor}{Character, minor panel grid visibility
+(default: "none")}
 
 \item{show_title}{Character, axis title visibility (default: "both")}
 
@@ -80,8 +89,7 @@ p <- iris |>
   geom_point(aes(color = Species), size = 0.5)
 p
 # Axis title
-p + theme_cat(show_title = "y") +
-  theme(legend.text = element_text(margin = margin(l = 0)))
+p + theme_cat(show_title = "y")
 
 # Axis text
 p + theme_cat(

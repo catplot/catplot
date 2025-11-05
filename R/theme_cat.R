@@ -6,7 +6,12 @@
 #' @param aspect_ratio Numeric, aspect ratio of the plot (default: NULL)
 #' @param frame Character, frame type, "none","closed" or "open" (default:
 #'   "closed")
-#' @param show_panel_grid Character, panel grid visibility (default: "none")
+#' @param show_panel_grid_marjor Character, major panel grid visibility
+#'  (default: "none")
+#' @param show_panel_grid_minor Character, minor panel grid visibility
+#' (default: "none")
+#' @param panel_widths Numeric vector, panel widths in pt (default: NULL)
+#' @param panel_heights Numeric vector, panel heights in pt (default: NULL)
 #' @param show_title Character, axis title visibility (default: "both")
 #' @param show_text Character, axis text visibility (default: "both")
 #' @param text_italic Character, axis text italicization (default: "none")
@@ -33,7 +38,8 @@ theme_cat <- function(
     panel_heights = NULL,
     aspect_ratio = NULL,
     frame = "open",
-    show_panel_grid = "none",
+    show_panel_grid_marjor = "none",
+    show_panel_grid_minor = "none",
     show_title = "both",
     show_text = "both",
     text_italic = "none",
@@ -52,9 +58,14 @@ theme_cat <- function(
   panel_heights <- if (!is.null(panel_heights)) {
     unit(panel_heights, "pt")
   }
+  # panel_widths and panel_heights can not be set together with aspect_ratio
+  if (!is.null(aspect_ratio) && (!is.null(panel_widths) || !is.null(panel_heights))) {
+    abort("`aspect_ratio` cannot be set together with `panel_widths` or `panel_heights`.")
+  }
 
   arg_match0(arg = frame, values = c("none", "closed", "open"))
-  arg_match0(arg = show_panel_grid, values = c("none", "x", "y", "both"))
+  arg_match0(arg = show_panel_grid_marjor, values = c("none", "x", "y", "both"))
+  arg_match0(arg = show_panel_grid_minor, values = c("none", "x", "y", "both"))
   arg_match0(arg = show_title, values = c("none", "x", "y", "both"))
   arg_match0(arg = show_text, values = c("none", "x", "y", "both"))
   arg_match0(arg = text_italic, values = c("none", "x", "y", "both"))
@@ -81,7 +92,8 @@ theme_cat <- function(
       family = font_family,
       size = base_font_size,
       face = "plain",
-      colour = "black"
+      colour = "black",
+      margin = margin()
     )
   } else {
     legend_title <- element_blank()
@@ -176,15 +188,27 @@ theme_cat <- function(
     axis_ticks_y <- element_blank()
   }
   # Panel grid
-  if (show_panel_grid %in% c("x", "both")) {
-    panel_grid_x <- grid_element
+  ## panel_grid_major
+  if (show_panel_grid_marjor %in% c("x", "both")) {
+    panel_grid_major_x <- grid_element
   } else {
-    panel_grid_x <- element_blank()
+    panel_grid_major_x <- element_blank()
   }
-  if (show_panel_grid %in% c("y", "both")) {
-    panel_grid_y <- grid_element
+  if (show_panel_grid_marjor %in% c("y", "both")) {
+    panel_grid_major_y <- grid_element
   } else {
-    panel_grid_y <- element_blank()
+    panel_grid_major_y <- element_blank()
+  }
+  ## panel_grid_minor
+  if (show_panel_grid_minor %in% c("x", "both")) {
+    panel_grid_minor_x <- grid_element
+  } else {
+    panel_grid_minor_x <- element_blank()
+  }
+  if (show_panel_grid_minor %in% c("y", "both")) {
+    panel_grid_minor_y <- grid_element
+  } else {
+    panel_grid_minor_y <- element_blank()
   }
   # Panel border & axis line
   if (frame == "closed") {
