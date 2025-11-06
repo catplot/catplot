@@ -93,12 +93,11 @@ theme_cat <- function(
       size = base_font_size,
       face = "plain",
       colour = "black",
-      margin = margin()
+      # margin = margin(b = 3)
     )
   } else {
     legend_title <- element_blank()
   }
-
 
   legend_direction <- legend_direction %||% "default"
   legend_direction <- switch(legend_position,
@@ -289,7 +288,14 @@ theme_cat <- function(
       size = base_font_size,
       face = "plain",
       colour = "black",
-      margin = margin(l = 0)
+      # margin = switch(
+      #   legend_position,
+      #   "right" = margin(l = 3),
+      #   "left" = margin(r = 3),
+      #   "top" = margin(b = 3),
+      #   "bottom" = margin(t = 3),
+      #   margin()
+      # )
     ),
     legend.background = element_blank(),
     # Strip
